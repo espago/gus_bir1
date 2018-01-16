@@ -4,7 +4,7 @@
 [![Code Climate](https://codeclimate.com/github/espago/gus_bir1/badges/gpa.svg)](https://codeclimate.com/github/espago/gus_bir1)
 [![Test Coverage](https://codeclimate.com/github/espago/gus_bir1/badges/coverage.svg)](https://codeclimate.com/github/espago/gus_bir1)
 
-Simple, ruby wrapper for REGON database (web frontend is reachable at https://wyszukiwarkaregon.stat.gov.pl/appBIR/index.aspx). To access its SOAP API, one needs an USER_KEY issued by REGON administrators available at Regon_Bir@stat.gov.pl.
+Simple, ruby wrapper for REGON database (Baza Internetowa Regon (BIR))(web frontend is reachable at https://wyszukiwarkaregon.stat.gov.pl/appBIR/index.aspx). To access its SOAP API, one needs an USER_KEY issued by REGON administrators available at Regon_Bir@stat.gov.pl.
 Official GUS docs http://bip.stat.gov.pl/dzialalnosc-statystyki-publicznej/rejestr-regon/interfejsyapi/jak-skorzystac-informacja-dla-podmiotow-komercyjnych/
 
 
@@ -151,7 +151,7 @@ if gus_response.first
   gus_data = gus_response.first.to_h
   prefix = gus_data.first.first.split('_').first
   company.name = gus_data["#{prefix}_nazwaSkrocona"]
-  company.name = gus_data["#{prefix}_nazwa"] if company.name.empty?
+  company.name = gus_data["#{prefix}_nazwa"] if company.name.blank?
   company.address = gus_data["#{prefix}_adSiedzUlica_Nazwa"]
   company.address += " " + gus_data["#{prefix}_adSiedzNumerNieruchomosci"] if gus_data["#{prefix}_adSiedzNumerNieruchomosci"]
   company.address += "/#{gus_data["#{prefix}_adSiedzNumerLokalu"]}" if gus_data["#{prefix}_adSiedzNumerLokalu"]
