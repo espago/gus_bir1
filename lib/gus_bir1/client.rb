@@ -3,7 +3,7 @@
 module GusBir1
   class Client
     SESSION_TIMEOUT = 3600
-    attr_accessor :production, :client_key
+    attr_accessor :production, :client_key, :log_level, :logging
 
     def service_status
       v = get_value(Constants::PARAM_PARAM_NAME => Constants::PARAM_SERVICE_STATUS)
@@ -11,6 +11,7 @@ module GusBir1
     end
 
     def session_status
+      set_session_id
       v = get_value(Constants::PARAM_PARAM_NAME => Constants::PARAM_SESSION_STATUS)
       Response::Simple.new(v, Constants::PARAM_SESSION_STATUS)
     end
@@ -94,11 +95,11 @@ module GusBir1
     def call(method, message)
       case method
       when
-        :zaloguj,
           :wyloguj,
           :dane_szukaj,
           :dane_pobierz_pelny_raport,
-          :dane_komunikat
+          :dane_komunikat,
+          :zaloguj
         savon_client_publ.call(method, message: message)
       else
         savon_client.call(method, message: message)
@@ -137,7 +138,7 @@ module GusBir1
     end
 
     def savon_options(publ: false)
-      {
+      params = {
         wsdl: Constants::WSDL_URL,
         namespaces: namespaces(publ: publ),
         endpoint: endpoint,
@@ -147,10 +148,13 @@ module GusBir1
         namespace_identifier: :ns,
         element_form_default: :qualified,
         multipart: true,
-        log_level: :debug,
-        log: false,
-        headers: { sid: @sid }
+        log_level: @log_level,
+        log: @logging
       }
+      if defined?(@sid) && @sid.nil? == false
+        params.merge!({headers: { sid: @sid } })
+      end
+      params
     end
 
     def clear_savon_clients
