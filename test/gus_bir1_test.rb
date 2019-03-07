@@ -51,7 +51,7 @@ class GusBir1Test < Minitest::Test
   end
 
   def test_status_date_state
-    assert_equal '18-05-2016', GusBir1.status_date_state
+    assert_equal '19-10-2018', GusBir1.status_date_state
   end
 
   def test_session_status
