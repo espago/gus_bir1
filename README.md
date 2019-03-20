@@ -4,8 +4,8 @@
 [![Code Climate](https://codeclimate.com/github/espago/gus_bir1/badges/gpa.svg)](https://codeclimate.com/github/espago/gus_bir1)
 [![Test Coverage](https://codeclimate.com/github/espago/gus_bir1/badges/coverage.svg)](https://codeclimate.com/github/espago/gus_bir1)
 
-Simple, ruby wrapper for REGON database (Baza Internetowa Regon (BIR))(web frontend is reachable at https://wyszukiwarkaregon.stat.gov.pl/appBIR/index.aspx). To access its SOAP API, one needs an USER_KEY issued by REGON administrators available at Regon_Bir@stat.gov.pl.
-Official GUS docs http://bip.stat.gov.pl/dzialalnosc-statystyki-publicznej/rejestr-regon/interfejsyapi/jak-skorzystac-informacja-dla-podmiotow-komercyjnych/
+Simple, ruby wrapper for REGON database (Baza Internetowa Regon (BIR))(web frontend is reachable at https://wyszukiwarkaregon.stat.gov.pl/appBIR/index.aspx). To access its SOAP API, one needs an USER_KEY issued by REGON administrators available at regon_bir@stat.gov.pl.
+Official GUS docs https://api.stat.gov.pl/Home/RegonApi
 
 
 ## Installation
