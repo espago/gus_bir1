@@ -42,7 +42,7 @@ module GusBir1
       end
     end
 
-    def get_full_data(regon, report = 'PublDaneRaportPrawna')
+    def get_full_data(regon, report = 'BIR11OsPrawna')
       set_session_id
       Response::FullData.new dane_pobierz_pelny_raport(
         Constants::PARAM_REGON => regon,
