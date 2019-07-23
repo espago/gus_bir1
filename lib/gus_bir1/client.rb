@@ -149,7 +149,8 @@ module GusBir1
         element_form_default: :qualified,
         multipart: true,
         log_level: @log_level,
-        log: @logging
+        log: @logging,
+        proxy: ENV['GUS_BIR_PROXY_URL']
       }
       if defined?(@sid) && @sid.nil? == false
         params.merge!({headers: { sid: @sid } })
