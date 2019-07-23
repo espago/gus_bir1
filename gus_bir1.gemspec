@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov', '~> 0'
 
   spec.add_dependency 'savon', '~> 2.12'
-  spec.add_dependency 'savon-multipart', '~> 2.1', '>= 2.1.1'
+  spec.add_dependency 'savon-multipart--feb-2019', '~> 2.1', '>= 2.1.2'
 end
