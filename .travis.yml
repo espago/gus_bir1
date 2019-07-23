@@ -6,7 +6,8 @@ sudo: false
 language: ruby
 rvm:
   - 2.4
-before_install: gem install bundler -v 1.14.6
+  - 2.6
+before_install: gem install bundler
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter

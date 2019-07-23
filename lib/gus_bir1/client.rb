@@ -67,7 +67,7 @@ module GusBir1
     def search_by(search_by, search)
       set_session_id
       Response::Search.new(
-        dane_szukaj(Constants::PARAM_SEARCH => { search_by => search })
+        dane_szukaj_podmioty(Constants::PARAM_SEARCH => { search_by => search })
       ).array
     end
 
@@ -96,7 +96,7 @@ module GusBir1
       case method
       when
           :wyloguj,
-          :dane_szukaj,
+          :dane_szukaj_podmioty,
           :dane_pobierz_pelny_raport,
           :dane_komunikat,
           :zaloguj
@@ -139,9 +139,8 @@ module GusBir1
 
     def savon_options(publ: false)
       params = {
-        wsdl: Constants::WSDL_URL,
+        wsdl: endpoint,
         namespaces: namespaces(publ: publ),
-        endpoint: endpoint,
         env_namespace: :soap,
         use_wsa_headers: true,
         soap_version: 2,

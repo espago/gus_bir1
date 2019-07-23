@@ -9,6 +9,8 @@ module GusBir1
           typ = search_report.type
           silos_id = search_report.silos_id
           method = "type_#{typ.to_s.downcase}"
+          return unless typ
+
           send(method, silos_id)
         end
 

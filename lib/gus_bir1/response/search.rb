@@ -35,10 +35,12 @@ module GusBir1
       end
 
       def type_info(search_result)
+        return unless search_result.type
         Dictionary.szukaj_typ[search_result.type.to_sym]
       end
 
       def silos_info(search_result)
+        return unless search_result.silos_id
         Dictionary.szukaj_silos_id[search_result.silos_id.to_sym]
       end
 

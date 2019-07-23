@@ -13,7 +13,7 @@ class GusBir1Test < Minitest::Test
 
     @gus_hash = {
       name: 'GŁÓWNY URZĄD STATYSTYCZNY',
-      regon: '00033150100000',
+      regon: '000331501',
       province: 'MAZOWIECKIE',
       district: 'm. st. Warszawa',
       community: 'Śródmieście',
@@ -29,7 +29,7 @@ class GusBir1Test < Minitest::Test
 
     @psp_hash = {
       name: '"PSP POLSKA" SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ',
-      regon: '02121583300000',
+      regon: '021215833',
       province: 'DOLNOŚLĄSKIE',
       district: 'm. Wrocław',
       community: 'Wrocław-Stare Miasto',
@@ -61,7 +61,8 @@ class GusBir1Test < Minitest::Test
   end
 
   def test_find_by_regon
-    response = GusBir1.find_by(regon: '00033150100000')
+    response = GusBir1.find_by(regon: '000331501')
+
     assert_equal 1, response.size
     assert_equal @gus_hash, response.first.to_h
   end
@@ -95,8 +96,9 @@ class GusBir1Test < Minitest::Test
   def test_find_by_nips
     response = GusBir1.find_by(nips: '8992689516,5261040828')
     assert_equal 2, response.size
-    assert_equal @gus_hash, response.first.to_h
-    assert_equal @psp_hash, response.last.to_h
+    assert_equal @psp_hash, response.first.to_h
+    assert_equal @gus_hash, response.last.to_h
+
   end
 
   def test_find_by_krss
@@ -111,7 +113,7 @@ class GusBir1Test < Minitest::Test
     assert response.first.instance_of? GusBir1::Response::FullData
     assert response.first.respond_to?(:to_h)
     assert response.first.respond_to?(:body)
-    assert_equal 'GŁÓWNY URZĄD STATYSTYCZNY', response.first.to_h['praw_nazwa']
+    assert_equal 'GŁÓWNY URZĄD STATYSTYCZNY', response.last.to_h['praw_nazwa']
   end
 
   def test_get_full_data
