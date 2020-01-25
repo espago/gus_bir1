@@ -17,20 +17,22 @@ module GusBir1
       private
 
       def parse_dane(hash)
-        search_result            = OpenStruct.new
-        search_result.name       = hash['Nazwa']
-        search_result.regon      = hash['Regon']
-        search_result.province   = hash['Wojewodztwo']
-        search_result.district   = hash['Powiat']
-        search_result.community  = hash['Gmina']
-        search_result.city       = hash['Miejscowosc']
-        search_result.zip_code   = hash['KodPocztowy']
-        search_result.street     = hash['Ulica']
-        search_result.type       = hash['Typ']
-        search_result.silos_id   = hash['SilosID']
-        search_result.type_desc  = type_info(search_result)
-        search_result.silos_desc = silos_info(search_result)
-        search_result.report     = report_info(search_result)
+        search_result                 = OpenStruct.new
+        search_result.name            = hash['Nazwa']
+        search_result.regon           = hash['Regon']
+        search_result.province        = hash['Wojewodztwo']
+        search_result.district        = hash['Powiat']
+        search_result.community       = hash['Gmina']
+        search_result.city            = hash['Miejscowosc']
+        search_result.zip_code        = hash['KodPocztowy']
+        search_result.street          = hash['Ulica']
+        search_result.property_number = hash['NrNieruchomosci']
+        search_result.local_number    = hash['NrLokalu']
+        search_result.type            = hash['Typ']
+        search_result.silos_id        = hash['SilosID']
+        search_result.type_desc       = type_info(search_result)
+        search_result.silos_desc      = silos_info(search_result)
+        search_result.report          = report_info(search_result)
         search_result
       end
 
