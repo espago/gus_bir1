@@ -24,7 +24,10 @@ class GusBir1Test < Minitest::Test
       silos_id: '6',
       type_desc: 'Typ jednostki – jednostka prawna',
       silos_desc: 'Miejsce prowadzenia działalności jednostki prawnej',
-      report: 'PublDaneRaportPrawna'
+      report: 'PublDaneRaportPrawna',
+      street_number: '208',
+      house_number: nil,
+      street_address: "ul. Test-Krucza 208"
     }
 
     @psp_hash = {
@@ -40,7 +43,10 @@ class GusBir1Test < Minitest::Test
       silos_id: '6',
       type_desc: 'Typ jednostki – jednostka prawna',
       silos_desc: 'Miejsce prowadzenia działalności jednostki prawnej',
-      report: 'PublDaneRaportPrawna'
+      report: 'PublDaneRaportPrawna',
+      street_number: '15',
+      house_number: nil,
+      street_address: "ul. Test-Krucza 15"
     }
   end
 
@@ -98,7 +104,6 @@ class GusBir1Test < Minitest::Test
     assert_equal 2, response.size
     assert_equal @psp_hash, response.first.to_h
     assert_equal @gus_hash, response.last.to_h
-
   end
 
   def test_find_by_krss
