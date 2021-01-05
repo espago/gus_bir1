@@ -3,7 +3,7 @@
 module GusBir1
   class Client
     SESSION_TIMEOUT = 3600
-    attr_accessor :production, :client_key, :log_level, :logging
+    attr_accessor :production, :client_key, :log_level, :logging, :savon_adapter
 
     def service_status
       v = get_value(Constants::PARAM_PARAM_NAME => Constants::PARAM_SERVICE_STATUS)
@@ -149,12 +149,17 @@ module GusBir1
         multipart: true,
         log_level: @log_level,
         log: @logging,
-        proxy: ENV['GUS_BIR_PROXY_URL']
+        proxy: ENV['GUS_BIR_PROXY_URL'],
+        adapter: adapter
       }
       if defined?(@sid) && @sid.nil? == false
         params.merge!({headers: { sid: @sid } })
       end
       params
+    end
+
+    def adapter
+      @savon_adapter || :net_http
     end
 
     def clear_savon_clients
