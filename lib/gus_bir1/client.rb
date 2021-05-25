@@ -62,6 +62,22 @@ module GusBir1
       r.map { |h| get_full_data_from_response(h) }
     end
 
+    def get_report(report_name:, date:)
+      report_name = report_name.to_sym
+
+      unless Constants::REPORT_TYPES.keys.include?(report_name)
+        raise "report_name must be one of: #{Constants::REPORT_TYPES.keys}"
+      end
+
+      set_session_id
+      Response::Report.new(
+        dane_pobierz_raport_zbiorczy(
+          Constants::PARAM_REPORT_DATE => date,
+          Constants::PARAM_REPORT_NAME => Constants::REPORT_TYPES[report_name]
+        )
+      ).array
+    end
+
     private
 
     def search_by(search_by, search)
@@ -99,6 +115,7 @@ module GusBir1
           :dane_szukaj_podmioty,
           :dane_pobierz_pelny_raport,
           :dane_komunikat,
+          :dane_pobierz_raport_zbiorczy,
           :zaloguj
         savon_client_publ.call(method, message: message)
       else
