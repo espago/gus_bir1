@@ -7,7 +7,7 @@ require 'gus_bir1/version'
 Gem::Specification.new do |spec|
   spec.name          = 'gus_bir1'
   spec.version       = GusBir1::VERSION
-  spec.authors       = ['Wacław Łuczak']
+  spec.authors       = ['Waclaw Luczak']
   spec.email         = ['waclaw@luczak.it']
 
   spec.summary       = 'Rails GUS API library based on official REGON SOAP api.'
