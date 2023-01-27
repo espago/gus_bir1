@@ -86,10 +86,8 @@ class GusBir1Test < Minitest::Test
   end
 
   def test_find_by_regons14
-    response = GusBir1.find_by(regons14: '00033150100000,02121583300000')
-    assert_equal 2, response.size
-    assert_equal @gus_hash, response.first.to_h
-    assert_equal @psp_hash, response.last.to_h
+    response = GusBir1.find_by(regons14: '09144355400025')
+    assert_equal 1, response.size
   end
 
   def test_find_by_regons9

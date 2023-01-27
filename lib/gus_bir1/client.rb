@@ -58,7 +58,7 @@ module GusBir1
     end
 
     def find_and_get_full_data(hash)
-      r = find_by(hash)
+      r = find_by(**hash)
       r.map { |h| get_full_data_from_response(h) }
     end
 
@@ -85,7 +85,7 @@ module GusBir1
 
     def method_missing(method, *args)
       if savon_client.operations.include? method
-        response_hash = call(method, args[0]).hash
+        response_hash = call(method, args[0]).full_hash
         response_hash.dig(:envelope, :body, "#{method}_response".to_sym, "#{method}_result".to_sym)
       else
         super
