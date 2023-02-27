@@ -34,6 +34,7 @@ module GusBir1
         search_result.type_desc      = type_info(search_result)
         search_result.silos_desc     = silos_info(search_result)
         search_result.report         = report_info(search_result)
+        search_result.post_city      = hash['MiejscowoscPoczty']
         search_result
       end
 
