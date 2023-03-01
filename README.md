@@ -1,11 +1,13 @@
 # GusBir1
-[![Build Status](https://travis-ci.org/espago/gus_bir1.png?branch=master)](https://travis-ci.org/espago/gus_bir1)
+[![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
+[![CI badge](https://github.com/espago/gus_bir1/actions/workflows/ci.yml/badge.svg)](https://github.com/espago/gus_bir1/actions/workflows/ci.yml/badge.svg)
 [![Gem Version](https://badge.fury.io/rb/gus_bir1.svg)](https://badge.fury.io/rb/gus_bir1)
 [![Code Climate](https://codeclimate.com/github/espago/gus_bir1/badges/gpa.svg)](https://codeclimate.com/github/espago/gus_bir1)
 [![Test Coverage](https://codeclimate.com/github/espago/gus_bir1/badges/coverage.svg)](https://codeclimate.com/github/espago/gus_bir1)
 
-Simple, ruby wrapper for REGON database (Baza Internetowa Regon (BIR))(web frontend is reachable at https://wyszukiwarkaregon.stat.gov.pl/appBIR/index.aspx). To access its SOAP API, one needs an USER_KEY issued by REGON administrators available at regon_bir@stat.gov.pl.
-Official GUS docs https://api.stat.gov.pl/Home/RegonApi
+Simple, Ruby wrapper for REGON database (Baza Internetowa Regon (BIR))(web frontend is reachable at https://wyszukiwarkaregon.stat.gov.pl/appBIR/index.aspx). To access its SOAP API, one needs a USER_KEY issued by REGON administrators available at regon_bir@stat.gov.pl.
+
+Official GUS docs: https://api.stat.gov.pl/Home/RegonApi
 
 
 ## Installation
