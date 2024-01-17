@@ -27,7 +27,8 @@ class GusBir1Test < Minitest::Test
       report: 'PublDaneRaportPrawna',
       street_number: '208',
       house_number: nil,
-      street_address: "ul. Test-Krucza 208"
+      street_address: "ul. Test-Krucza 208",
+      post_city: 'Warszawa'
     }
 
     @psp_hash = {
@@ -46,7 +47,8 @@ class GusBir1Test < Minitest::Test
       report: 'PublDaneRaportPrawna',
       street_number: '15',
       house_number: nil,
-      street_address: "ul. Test-Krucza 15"
+      street_address: "ul. Test-Krucza 15",
+      post_city: 'Wrocław'
     }
   end
 
