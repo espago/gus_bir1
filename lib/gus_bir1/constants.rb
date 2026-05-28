@@ -16,6 +16,7 @@ module GusBir1
     PARAM_REGON = 'pRegon'
     PARAM_REPORT_NAME = 'pNazwaRaportu'
     PARAM_PARAM_NAME = 'pNazwaParametru'
+    PARAM_REPORT_DATE = 'pDataRaportu'
 
     SEARCH_TYPE_NIP  = 'dat:Nip'
     SEARCH_TYPE_KRS  = 'dat:Krs'
