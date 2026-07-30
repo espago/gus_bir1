@@ -1,9 +1,23 @@
 # frozen_string_literal: true
 
+require 'savon'
+
 module GusBir1
   class Client
     SESSION_TIMEOUT = 3600
+    PUBL_OPERATIONS = %i[
+      wyloguj
+      dane_szukaj_podmioty
+      dane_pobierz_pelny_raport
+      dane_komunikat
+      zaloguj
+    ].freeze
+
     attr_accessor :production, :client_key, :log_level, :logging
+
+    def initialize
+      @logging = false
+    end
 
     def service_status
       v = get_value(Constants::PARAM_PARAM_NAME => Constants::PARAM_SERVICE_STATUS)
@@ -25,6 +39,7 @@ module GusBir1
       types = [nip, regon, krs, nips, krss, regons14, regons9].compact
       raise TooMuchTypesSelected if types.size > 1
       raise NoOneTypeSelected if types.empty?
+
       if nip
         search_by Constants::SEARCH_TYPE_NIP, nip
       elsif regon
@@ -73,13 +88,14 @@ module GusBir1
 
     def namespaces(publ: true)
       {
-        'xmlns:ns' =>  publ ? Constants::WSDL_NS_PUBL : Constants::WSDL_NS,
+        'xmlns:ns' => publ ? Constants::WSDL_NS_PUBL : Constants::WSDL_NS,
         'xmlns:dat' => Constants::WSDL_NS_DATA_CONTRACT
       }
     end
 
     def endpoint
       return Constants::WSDL_ADDRESS if @production
+
       Constants::WSDL_ADDRESS_TEST
     end
 
@@ -93,21 +109,13 @@ module GusBir1
     end
 
     def call(method, message)
-      case method
-      when
-          :wyloguj,
-          :dane_szukaj_podmioty,
-          :dane_pobierz_pelny_raport,
-          :dane_komunikat,
-          :zaloguj
-        savon_client_publ.call(method, message: message)
-      else
-        savon_client.call(method, message: message)
-      end
+      client = PUBL_OPERATIONS.include?(method) ? savon_client_publ : savon_client
+      client.call(method, message: message)
     end
 
     def set_session_id
       return @sid if sid_active
+
       @sid_exp = Time.now + SESSION_TIMEOUT
       @sid = zaloguj(Constants::PARAM_USER_KEY => @client_key)
       clear_savon_clients
@@ -126,15 +134,20 @@ module GusBir1
 
     def logout
       return unless sid_active
+
       wyloguj(Constants::PARAM_SESSION_ID => @sid)
     end
 
     def savon_client_publ
-      @savon_client_publ ||= Savon.client(savon_options(publ: true))
+      @savon_client_publ ||= build_savon_client(publ: true)
     end
 
     def savon_client
-      @savon_client ||= Savon.client(savon_options)
+      @savon_client ||= build_savon_client(publ: false)
+    end
+
+    def build_savon_client(publ: false)
+      Savon.client(savon_options(publ: publ))
     end
 
     def savon_options(publ: false)
@@ -146,14 +159,11 @@ module GusBir1
         soap_version: 2,
         namespace_identifier: :ns,
         element_form_default: :qualified,
-        multipart: true,
         log_level: @log_level,
         log: @logging,
         proxy: ENV['GUS_BIR_PROXY_URL']
       }
-      if defined?(@sid) && @sid.nil? == false
-        params.merge!({headers: { sid: @sid } })
-      end
+      params.merge!({ headers: { sid: @sid } }) if defined?(@sid) && @sid.nil? == false
       params
     end
 
@@ -161,11 +171,5 @@ module GusBir1
       @savon_client = nil
       @savon_client_publ = nil
     end
-
-    def savon_api_client
-      @savon_api_client ||= GusBir1::SavonApiClient.new
-    end
   end
 end
-require 'savon'
-require 'savon-multipart'

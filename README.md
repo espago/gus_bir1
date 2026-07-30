@@ -35,6 +35,10 @@ Or install it yourself as:
 # TEST CONF
 GusBir1.production = false
 GusBir1.client_key = 'abcde12345abcde12345'
+
+# Optional, disabled by default. Enable Savon/HTTPI debug logging:
+GusBir1.logging = true
+GusBir1.log_level = :debug
 ```
 
 ### General info
